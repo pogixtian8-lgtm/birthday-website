@@ -5,168 +5,496 @@
 <title>Happy Birthday 🎉</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Google Fonts for love letter -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #a18cd1, #fbc2eb);
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 
-  .card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-    max-width: 400px;
-    width: 90%;
-    z-index: 10;
-  }
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #000;
+}
 
-  h1 {
-    color: #ff4d6d;
-    margin-bottom: 5px;
-  }
+/* ---------- INTRO ---------- */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #ff6ec7, #000);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
 
-  h2 {
-    color: #333;
-    margin-bottom: 10px;
-  }
+#intro h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px hotpink;
+}
 
-  p {
-    color: #555;
-    line-height: 1.5;
-  }
+#intro button {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background: linear-gradient(45deg, hotpink, gold);
+  color: white;
+}
 
-  .cake {
-    font-size: 60px;
-    margin-bottom: 10px;
-  }
+/* ---------- NAV ---------- */
+nav {
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
 
-  button {
-    margin-top: 15px;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 25px;
-    background: #ff4d6d;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
+nav button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+  font-weight: bold;
+}
 
-  button:hover {
-    background: #e63b5a;
-  }
+/* ---------- SECTIONS ---------- */
+section {
+  display: none;
+  padding: 40px;
+  text-align: center;
+  min-height: calc(100vh - 70px);
+  color: #333;
+}
 
-  .surprise {
-    display: none;
-    margin-top: 15px;
-    font-weight: bold;
-    color: #6a1b9a;
-  }
+section.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  .countdown {
-    margin: 15px 0;
-    font-size: 18px;
-    color: #444;
-  }
+/* ---------- COLORFUL HOME ---------- */
+#home {
+  background: linear-gradient(
+    135deg,
+    #ff6ec7,
+    #ffd93d,
+    #6ee7b7,
+    #60a5fa,
+    #a78bfa
+  );
+  background-size: 400% 400%;
+  animation: rainbowBG 10s ease infinite;
+  color: white;
+}
 
-  footer {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #888;
-  }
+@keyframes rainbowBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-  /* Confetti */
-  .confetti {
-    position: fixed;
-    top: -10px;
-    width: 10px;
-    height: 10px;
-    animation: fall linear infinite;
-  }
+#home h1 {
+  font-size: 3rem;
+  text-shadow: 0 0 10px #fff, 0 0 20px hotpink;
+}
 
-  @keyframes fall {
-    to {
-      transform: translateY(110vh) rotate(360deg);
-    }
+/* ---------- PICTURE / CAROUSEL ---------- */
+#picture {
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+}
+
+.carousel {
+  position: relative;
+  width: 300px;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  margin-top: 30px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-track img {
+  width: 300px;
+  height: 220px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 20px;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  padding: 5px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.prev:hover, .next:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+/* ---------- SONG ---------- */
+#song {
+  background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+}
+.song-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin: 20px 0;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+/* ---------- LOVE LETTER MESSAGE ---------- */
+#message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff0f5;
+  min-height: calc(100vh - 70px);
+}
+
+.letter {
+  background: #fff;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  color: #333;
+  line-height: 1.8;
+  position: relative;
+  text-align: left;
+}
+
+.letter::before {
+  content: "❤";
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 2rem;
+  color: #ff6ec7;
+  opacity: 0.7;
+}
+
+.letter h2 {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ff6ec7;
+}
+
+/* ---------- CAKE ---------- */
+.cake {
+  margin: 40px auto;
+  width: 220px;
+  height: 160px;
+  background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+  border-radius: 0 0 30px 30px;
+  position: relative;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+.cake::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  height: 15px;
+  background: repeating-linear-gradient(
+    45deg,
+    #ff6ec7,
+    #ff6ec7 10px,
+    #ffd93d 10px,
+    #ffd93d 20px
+  );
+}
+
+.candle {
+  width: 10px;
+  height: 40px;
+  background: white;
+  position: absolute;
+  top: -40px;
+}
+
+.flame {
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle, yellow, orange, red);
+  border-radius: 50%;
+  position: absolute;
+  top: -16px;
+  left: -3px;
+  animation: flicker 0.15s infinite alternate;
+}
+
+@keyframes flicker {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
+
+/* ---------- CONFETTI ---------- */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
   }
+}
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 Background Music -->
-<audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<!-- INTRO -->
+<div id="intro">
+  <h1>😁 SMILE BEFORE YOU OPEN 😁</h1>
+  <button onclick="startSite()">OPEN</button>
+
+
+<!-- Intro music -->
+<audio id="intro-audio" loop "autoplay">
+  <source src="audio/dramrol.mp3" type="audio/mpeg">
 </audio>
+</div>
+<!-- NAV -->
+<nav>
+  <button onclick="showSection('home')">Home</button>
+  <button onclick="showSection('picture')">Picture</button>
+  <button onclick="showSection('song')">Song</button>
+  <button onclick="showSection('message')">Message</button>
+</nav>
 
-<div class="card">
-  <div class="cake">🎂</div>
-  <h1>Happy Birthday!</h1>
-  <h2>🎉 John Doe 🎉</h2>
+<!-- HOME -->
+<section id="home" class="active">
+  <h1>🎉 Happy Birthday! 🎉</h1>
+  <h2>LEALYN MASUNGIT</h2>
+  <p>Click the cake to blow the candles 🎂</p>
 
-  <div class="countdown" id="countdown"></div>
-
-  <p>
-    Wishing you a day full of happiness, laughter,  
-    and endless blessings 🎈
-  </p>
-
-  <button onclick="showSurprise()">🎁 Click for a Surprise</button>
-
-  <div class="surprise" id="surprise">
-    💖 You are amazing and deeply appreciated! 💖
+  <div class="cake" onclick="blowCandles()">
+    <div class="candle" style="left:50px"><div class="flame"></div></div>
+    <div class="candle" style="left:100px"><div class="flame"></div></div>
+    <div class="candle" style="left:150px"><div class="flame"></div></div>
   </div>
 
-  <footer>
-    — From someone who cares 💕
-  </footer>
-</div>
+  <audio id="home-audio" loop>
+    <source src="audio/aplos.mp3" type="audio/mpeg">
+  </audio>
+</section>
+
+<!-- PICTURE / CAROUSEL -->
+<section id="picture">
+  <h1>📸 21 📸</h1>
+
+  <div class="carousel">
+    <button class="prev" onclick="moveSlide(-1)">❮</button>
+    <div class="carousel-track">
+      <img src="images/pic.jpg" alt="Memory 1">
+      <img src="images/pic2.jpg" alt="Memory 2">
+      <img src="images/pic5.jpg" alt="Memory 3">
+      <img src="images/pic4.jpg" alt="Memory 4">
+      <img src="images/pic3.jpg" alt="Memory 5">
+    </div>
+    <button class="next" onclick="moveSlide(1)">❯</button>
+  </div>
+
+  <audio id="picture-audio" loop>
+    <source src="audio/pibertdey.mp3" type="audio/mpeg">
+  </audio>
+</section>
+
+<!-- SONG -->
+<section id="song">
+  <h2>🎵 Favorite Song</h2>
+  <img src="images/house.jpg" alt="Song Picture" class="song-img">
+  <audio controls autoplay>
+    <source src="audio/tahanan.mp3" type="audio/mpeg">
+  </audio>
+</section>
+
+<!-- MESSAGE -->
+<section id="message">
+  <div class="letter">
+    <h2>💌 To My Special One and Only</h2>
+    <p>
+      My dearest bebe,<br><br>
+      Wishing you a happy happy birthday, iloveyousomuch!💖.<br>
+      May every dream we hold in our heart come true.<br>
+      Today is your special day, and I hope maging masaya ang araw mo.<br>
+Sana rin maging mabait ka na at 'wag mo na ako aawayin 😁.<br><br>
+      Always yours,<br>
+tantan mabait, masipag, at pogi
+      ❤️
+    </p>
+  </div>
+
+  <audio id="message-audio" loop>
+    <source src="audio/simoy.mp3" type="audio/mpeg">
+  </audio>
+</section>
+
+<!-- POP SOUND -->
+<audio id="pop-sound">
+  <source src="audio/pop.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-  /* 🎁 Surprise Message */
-  function showSurprise() {
-    document.getElementById("surprise").style.display = "block";
+/* ---------- INTRO AUDIO ---------- */
+window.addEventListener('load', () => {
+  const introAudio = document.getElementById('intro-audio');
+  introAudio.play().catch(() => {
+    document.body.addEventListener('click', () => introAudio.play());
+  });
+});
+
+/* ---------- START SITE ---------- */
+function startSite() {
+  const introAudio = document.getElementById('intro-audio');
+  const homeAudio = document.getElementById('home-audio');
+
+  // Fade out intro audio
+  let step = 0.05, interval = 50;
+  const fadeOut = setInterval(() => {
+    if (introAudio.volume > 0) introAudio.volume = Math.max(introAudio.volume - step, 0);
+    else { introAudio.pause(); clearInterval(fadeOut); }
+  }, interval);
+
+  // Fade in home audio
+  homeAudio.volume = 0;
+  homeAudio.play();
+  const fadeIn = setInterval(() => {
+    if (homeAudio.volume < 1) homeAudio.volume = Math.min(homeAudio.volume + step, 1);
+    else clearInterval(fadeIn);
+  }, interval);
+
+  document.getElementById('intro').style.display = 'none';
+  createConfetti();
+}
+
+/* ---------- SECTION SWITCH ---------- */
+function showSection(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  const homeAudio = document.getElementById('home-audio');
+  const pictureAudio = document.getElementById('picture-audio');
+  const songAudio = document.querySelector("#song audio");
+  const messageAudio = document.getElementById('message-audio');
+
+  fadeAudio(homeAudio, id === 'home');
+  fadeAudio(pictureAudio, id === 'picture');
+  fadeAudio(songAudio, id === 'song');
+  fadeAudio(messageAudio, id === 'message');
+}
+
+function fadeAudio(audio, play) {
+  if (!audio) return;
+  let step = 0.05, interval = 50;
+  if (play) {
+    audio.volume = 0;
+    audio.play();
+    const fadeIn = setInterval(() => {
+      if (audio.volume < 1) audio.volume = Math.min(audio.volume + step, 1);
+      else clearInterval(fadeIn);
+    }, interval);
+  } else {
+    const fadeOut = setInterval(() => {
+      if (audio.volume > 0) audio.volume = Math.max(audio.volume - step, 0);
+      else { audio.pause(); clearInterval(fadeOut); }
+    }, interval);
   }
+}
 
-  /* ⏳ Countdown (CHANGE DATE HERE) */
-  const birthday = new Date("2026-01-15 00:00:00").getTime();
+function blowCandles() {
+  document.querySelectorAll('.flame').forEach(f => f.remove());
+  createConfetti();
+  const pop = document.getElementById('pop-sound');
+  pop.currentTime = 0;
+  pop.play();
+}
 
-  setInterval(() => {
-    const now = new Date().getTime();
-    const distance = birthday - now;
-
-    if (distance < 0) {
-      document.getElementById("countdown").innerHTML = "🎉 TODAY IS THE DAY! 🎉";
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((distance / (1000 * 60)) % 60);
-    const seconds = Math.floor((distance / 1000) % 60);
-
-    document.getElementById("countdown").innerHTML =
-      `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }, 1000);
-
-  /* 🎊 Confetti */
-  for (let i = 0; i < 100; i++) {
-    const confetti = document.createElement("div");
-    confetti.classList.add("confetti");
-    confetti.style.left = Math.random() * 100 + "vw";
-    confetti.style.background =
-      `hsl(${Math.random() * 360}, 100%, 50%)`;
-    confetti.style.animationDuration =
-      Math.random() * 3 + 2 + "s";
-    document.body.appendChild(confetti);
+function createConfetti() {
+  for (let i = 0; i < 120; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = `hsl(${Math.random()*360},100%,50%)`;
+    c.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
   }
+}
+
+/* ---------- CAROUSEL JS ---------- */
+let currentSlide = 0;
+const track = document.querySelector(".carousel-track");
+const slides = track.children.length;
+const slideWidth = 300;
+
+function moveSlide(direction) {
+  currentSlide += direction;
+  if (currentSlide < 0) currentSlide = slides - 1;
+  if (currentSlide >= slides) currentSlide = 0;
+  track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+}
+
+let autoplayInterval = setInterval(() => moveSlide(1), 3000);
+const carousel = document.querySelector(".carousel");
+carousel.addEventListener("mouseenter", () => clearInterval(autoplayInterval));
+carousel.addEventListener("mouseleave", () => {
+  autoplayInterval = setInterval(() => moveSlide(1), 3000);
+});
+
+let startX = 0;
+carousel.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; });
+carousel.addEventListener("touchend", (e) => {
+  let endX = e.changedTouches[0].clientX;
+  let diff = startX - endX;
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) moveSlide(1);
+    else moveSlide(-1);
+  }
+});
 </script>
 
 </body>
